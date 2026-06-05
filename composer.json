@@ -1,0 +1,13 @@
+{
+    "name": "nexph/dev",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Nexph\\Dev\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.1"
+    }
+}
