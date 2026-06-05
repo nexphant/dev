@@ -1,5 +1,6 @@
 {
     "name": "nexph/dev",
+    "description": "Nexph Development Tools",
     "type": "library",
     "license": "MIT",
     "autoload": {
