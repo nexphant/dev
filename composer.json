@@ -1,6 +1,6 @@
 {
     "name": "nexphant/dev",
-    "description": "nexphant Development Tools",
+    "description": "Nexphant Development Tools",
     "type": "library",
     "license": "MIT",
     "autoload": {
