@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexph\Dev;
+namespace nexphant\Dev;
 
 class ProcessRunner
 {

@@ -1,12 +1,12 @@
 {
-    "name": "nexph/dev",
-    "description": "Nexph Development Tools",
+    "name": "nexphant/dev",
+    "description": "nexphant Development Tools",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Nexph\\Dev\\": "src/",
-            "Nexph\\": "src/Foundation/"
+            "nexphant\\Dev\\": "src/",
+            "nexphant\\": "src/Foundation/"
         }
     },
     "require": {

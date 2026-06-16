@@ -1,11 +1,11 @@
-# Nexph Dev
+# nexphant Dev
 
-Development tools for Nexph.
+Development tools for nexphant.
 
 ## Installation
 
 ```bash
-composer require nexph/dev --dev
+composer require nexphant/dev --dev
 ```
 
 ## License

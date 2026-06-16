@@ -1,5 +1,5 @@
 <?php
-namespace Nexph\Dev;
+namespace nexphant\Dev;
 
 class Reload
 {

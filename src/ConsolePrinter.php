@@ -1,35 +1,35 @@
 <?php
-namespace Nexph\Dev;
+namespace nexphant\Dev;
 
 class ConsolePrinter
 {
     public function info(string $msg): void
     {
-        echo "[nexph] $msg\n";
+        echo "[nexphant] $msg\n";
     }
 
     public function warn(string $msg): void
     {
-        echo "[nexph] $msg\n";
+        echo "[nexphant] $msg\n";
     }
 
     public function error(string $msg): void
     {
-        echo "[nexph] $msg\n";
+        echo "[nexphant] $msg\n";
     }
 
     public function changed(string $file): void
     {
-        echo "[nexph] changed: $file\n";
+        echo "[nexphant] changed: $file\n";
     }
 
     public function started(): void
     {
-        echo "[nexph] dev reload started\n";
+        echo "[nexphant] dev reload started\n";
     }
 
     public function restarted(): void
     {
-        echo "[nexph] restarted\n";
+        echo "[nexphant] restarted\n";
     }
 }

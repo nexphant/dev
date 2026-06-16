@@ -1,5 +1,5 @@
 <?php
-namespace Nexph;
+namespace nexphant;
 
 final class Reload
 {
@@ -12,7 +12,7 @@ final class Reload
         float $gracefulTimeout = 3,
         ?string $root = null,
     ): void {
-        \Nexph\Dev\Reload::watch($watch)
+        \nexphant\Dev\Reload::watch($watch)
             ->ignore($ignore)
             ->ext($extensions)
             ->command($command)
