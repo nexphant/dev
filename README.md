@@ -1,4 +1,4 @@
-# nexphant Dev
+# Nexphant Dev
 
 Development tools for nexphant.
 
