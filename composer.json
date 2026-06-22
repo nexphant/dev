@@ -5,8 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "nexphant\\Dev\\": "src/",
-            "nexphant\\": "src/Foundation/"
+            "Nexphant\\Dev\\": "src/",
+            "Nexphant\\": "src/Foundation/"
         }
     },
     "require": {
