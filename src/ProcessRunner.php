@@ -6,6 +6,7 @@ class ProcessRunner
 {
     private $process = null;
     private ?int $pid = null;
+    private ?int $pgid = null;
     private ?int $exitCode = null;
     private array $pipes = [];
 
@@ -23,7 +24,11 @@ class ProcessRunner
             2 => STDERR,
         ];
 
-        $this->process = proc_open($this->command, $descriptors, $pipes, $this->cwd);
+        // Replace proc_open's shell with a new session leader, then run the
+        // configured command inside that process group.
+        $wrappedCommand = 'exec setsid sh -c ' . escapeshellarg($this->command);
+
+        $this->process = proc_open($wrappedCommand, $descriptors, $pipes, $this->cwd);
 
         if (!is_resource($this->process)) {
             $this->process = null;
@@ -39,6 +44,7 @@ class ProcessRunner
 
         $status = proc_get_status($this->process);
         $this->pid = $status['pid'] ?? null;
+        $this->pgid = $this->pid;
         $this->exitCode = null;
     }
 
@@ -50,7 +56,11 @@ class ProcessRunner
         }
 
         if ($this->isRunning()) {
-            if ($this->pid && function_exists('posix_kill')) {
+            if ($this->pgid && function_exists('posix_kill')) {
+                // Send SIGTERM to the entire process group so supervisor
+                // and all forked HTTP workers receive the signal.
+                @posix_kill(-$this->pgid, SIGTERM);
+            } elseif ($this->pid && function_exists('posix_kill')) {
                 @posix_kill($this->pid, SIGTERM);
             } else {
                 @proc_terminate($this->process);
@@ -63,7 +73,10 @@ class ProcessRunner
             }
 
             if ($this->isRunning()) {
-                if ($this->pid && function_exists('posix_kill')) {
+                // Escalate to SIGKILL for the whole process group.
+                if ($this->pgid && function_exists('posix_kill')) {
+                    @posix_kill(-$this->pgid, SIGKILL);
+                } elseif ($this->pid && function_exists('posix_kill')) {
                     @posix_kill($this->pid, SIGKILL);
                 }
 
@@ -125,6 +138,7 @@ class ProcessRunner
     {
         $this->process = null;
         $this->pid = null;
+        $this->pgid = null;
         $this->pipes = [];
     }
 

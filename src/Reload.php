@@ -92,11 +92,14 @@ class Reload
                 $pendingRestart = false;
             }
 
-            if (!$runner->isRunning()) {
+            if (!$runner->isRunning() && !$pendingRestart) {
                 $code = $runner->exitCode();
                 if ($code !== null && $code !== 0) {
                     $printer->error("app crashed with code $code");
-                    $printer->info('waiting for change...');
+                    $printer->info('restarting after crash...');
+                    usleep(500_000);
+                    $runner->start();
+                    $printer->restarted();
                 }
             }
 
